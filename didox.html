@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DIDOXX - Responsive Website</title>
+  <link rel="stylesheet" href="didox.css" />
+  <link href="didox.css" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <a href="didox.html" aria-label="Home" class="logo">DIDOXX</a>
+    <button class="mobile-menu-button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Toggle menu">&#9776;</button>
+    <nav>
+      <ul id="primary-navigation" role="menu">
+        <li><a href="didox.html" role="menuitem" tabindex="0">Home</a></li>
+        <li><a href="About.html" role="menuitem" tabindex="0">About-us</a></li>
+        <li><a href="#" role="menuitem" tabindex="0">Services</a></li>
+        <li><a href="#" role="menuitem" tabindex="0">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container">
+      <section id="hero" role="banner" aria-label="Welcome">
+        <h2>WELCOME TO DIDOXX!</h2>
+        <p>This is a brief introduction to what my website is all about. Feel free to explore!</p>
+        <a href="about.html" class="button-link">Learn More</a>
+      </section>
+
+      <section id="featured" aria-label="Featured Content">
+        <h3>Featured Content</h3>
+        <div>
+          <article tabindex="0" aria-label="Featured Item 1">
+            <img src="pro1.jpg" alt="Featured Item 1" />
+            <div>
+              <h4>Item 1 Title</h4>
+              <p>A short description of featured item 1.</p>
+            </div>
+          </article>
+
+          <article tabindex="0" aria-label="Featured Item 2">
+            <img src="pro2.jpg" alt="Featured Item 2" />
+            <div>
+              <h4>Item 2 Title</h4>
+              <p>A short description of featured item 2.</p>
+            </div>
+          </article>
+
+          <article tabindex="0" aria-label="Featured Item 3">
+            <img src="pro3.jpg" alt="Featured Item 3" />
+            <div>
+              <h4>Item 3 Title</h4>
+              <p>A short description of featured item 3.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 DIDOXX. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const mobileButton = document.querySelector('.mobile-menu-button');
+    const navMenu = document.getElementById('primary-navigation');
+
+    mobileButton.addEventListener('click', () => {
+      const expanded = mobileButton.getAttribute('aria-expanded') === 'true' || false;
+      mobileButton.setAttribute('aria-expanded', !expanded);
+      navMenu.classList.toggle('show');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!navMenu.contains(e.target) && !mobileButton.contains(e.target)) {
+        navMenu.classList.remove('show');
+        mobileButton.setAttribute('aria-expanded', 'false');
+      }
+    });
+  </script>
+</body>
+</html>
