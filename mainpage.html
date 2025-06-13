@@ -1,459 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DIDOXX - Responsive Website</title>
-  <link rel="stylesheet" href="didox.css" />
-  <link href="didox.css" rel="stylesheet" />
-</head>
-   <style>
-    /* Inherit styles consistent with About.html */
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DIDOXX - index Animation</title>
+<style>
+  /* Root and basic styles */
+  :root {
+    --color-bg: #252332a2; /* back shade */
+    --color-primary: #2f2f2f; /* logo */
+    --color-text: #0c0505;
+    --font-heading: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
 
-    :root {
-      --color-bg: #ffffff;
-      --color-primary: #111827;
-      --color-accent: #005187;
-      --color-text: #6b7280;
-      --color-heading: #111827;
-      --border-radius: 0.75rem;
-      --shadow-light: 0 4px 12px rgba(0,0,0,0.05);
-      --font-heading: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      --font-body: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+  html, body {
+    margin: 0; padding: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ffe3e3, #886ba5);
+    font-family: var(--font-heading);
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-text);
+    position: relative;
+  }
 
-    * {
-      box-sizing: border-box;
-    }
+  #index-overlay {
+    text-align: center;
+    user-select: none;
+    position: relative;
+    z-index: 2;
+    max-width: 360px;
+  }
 
-    body {
-      margin: 0;
-      font-family: var(--font-body);
-      background-color: var(--color-bg);
-      color: var(--color-text);
-      line-height: 1.6;
-      font-size: 18px;
-      font-weight: 400;
-      animation: fadeIn 1s ease-in-out; /* Fade-in animation for the body */
-    }
+  #index-logo {
+    font-size: 4rem;
+    font-weight: 900;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeInUpScale 1.5s ease forwards;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    color: var(--color-primary);
+    text-shadow:
+      0 0 8px var(--color-primary),
+      0 0 20px var(--color-primary, 0.7);
+  }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
+  #index-subtitle {
+    font-size: 1.25rem;
+    margin-top: 1rem;
+    opacity: 0;
+    animation: fadeInUp 1.5s ease forwards 1.5s;
+    color: var(--color-text);
+    position: relative;
+  }
 
-    a {
-      color: var(--color-accent);
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s ease;
-    }
-    a:hover,
-    a:focus {
-      color: #10375c;
-      outline: none;
-    }
+  /* Animated underline for subtitle */
+  #index-subtitle::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 2px;
+    background: var(--color-primary);
+    margin: 12px auto 0 auto;
+    border-radius: 2px;
+    transform-origin: center;
+    transform: scaleX(0);
+    animation: underlineGrow 1s ease forwards 2.7s;
+  }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1rem;
-    }
+  /* Background animated gradient */
+  body::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 30%, #dfdfdf, transparent 40%),
+                radial-gradient(circle at 70% 70%, #ecfaff, transparent 40%);
+    animation: backgroundMove 20s linear infinite;
+    filter: blur(5px);
+    z-index: 1;
+  }
 
-    header {
-      position: sticky;
-      top: 0;
-      background: var(--color-bg);
-      box-shadow: var(--shadow-light);
-      padding: 0.75rem 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 1000;
-    }
-    .logo {
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 1.75rem;
-      color: var(--color-primary);
-      user-select: none;
-    }
+  /* Floating geometric shapes */
+  .floating-shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.15;
+    border: 2px solid var(--color-primary);
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    z-index: 1;
+  }
 
-    nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      gap: 2rem;
-    }
-    nav li a {
-      font-weight: 600;
-      color: var(--color-accent);
-      font-size: 1rem;
-      padding: 0.25rem 0.5rem;
-      border-radius: 0.375rem;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-    nav li a:hover,
-    nav li a:focus {
-      background-color: var(--color-accent);
-      color: #fff;
-      outline: none;
-    }
+  .shape-1 {
+    width: 120px;
+    height: 120px;
+    top: 20%;
+    left: 15%;
+    animation-name: floatUpDown;
+    animation-duration: 6s;
+    animation-delay: 0s;
+  }
 
-    main {
-      padding: 3rem 1rem 5rem;
-    }
+  .shape-2 {
+    width: 90px;
+    height: 90px;
+    top: 65%;
+    right: 20%;
+    animation-name: floatUpDown;
+    animation-duration: 8s;
+    animation-delay: 2s;
+    animation-direction: reverse;
+  }
 
-    h1 {
-      font-family: var(--font-heading);
-      font-weight: 800;
-      font-size: 3.5rem;
-      color: var(--color-heading);
-      margin-bottom: 1rem;
-      line-height: 1.1;
-      text-align: center;
-    }
+  .shape-3 {
+    width: 60px;
+    height: 60px;
+    top: 40%;
+    right: 45%;
+    animation-name: floatUpDown;
+    animation-duration: 7s;
+    animation-delay: 1s;
+  }
 
-    p.lead {
-      font-size: 1.125rem;
-      color: var(--color-text);
-      max-width: 700px;
-      margin: 0 auto 3rem;
-      text-align: center;
-    }
-
-    form.contact-form {
-      max-width: 600px;
-      margin: 0 auto;
-      background: var(--color-bg);
-      box-shadow: var(--shadow-light);
-      border-radius: var(--border-radius);
-      padding: 2rem 2.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      animation: fadeIn 1s ease-in-out; /* Fade-in animation for the form */
-    }
-
-    label {
-      font-weight: 600;
-      color: var(--color-primary);
-      margin-bottom: 0.5rem;
-      display: block;
-      font-size: 1rem;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="tel"],
-    textarea {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      border: 1.5px solid #d1d5db;
-      border-radius: 0.5rem;
-      font-size: 1rem;
-      font-family: var(--font-body);
-      transition: border-color 0.3s ease, transform 0.3s ease; /* Added transform for animation */
-      resize: vertical;
-      min-height: 40px;
-    }
-
-    input[type="text"]:focus,
-    input[type="email"]:focus,
-    input[type="tel"]:focus,
-    textarea:focus {
-      border-color: var(--color-accent);
-      outline: none;
-      box-shadow: 0 0 8px rgba(0,81,135,0.25);
-      transform: scale(1.02); /* Scale effect on focus */
-    }
-
-    textarea {
-      min-height: 120px;
-    }
-
-    button[type="submit"] {
-      background-color: var(--color-accent);
-      color: white;
-      font-weight: 700;
-      font-size: 1.125rem;
-      padding: 0.75rem 2.5rem;
-      border: none;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.3s ease; /* Added transform for animation */
-      align-self: center;
-      width: max-content;
-      min-width: 160px;
-      user-select: none;
-    }
-
-    button[type="submit"]:hover,
-    button[type="submit"]:focus {
-      background-color: #10375c;
-      outline: none;
-      transform: scale(1.05); /* Scale effect on hover */
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
-    }
-
-    /* Footer */
-    footer {
-      max-width: 1200px;
-      margin: 3rem auto 1rem;
-      padding: 2rem 1.5rem;
-      background: #000001;
-      color: #e1d9f3;
-      border-radius: 40px;
-      box-shadow: 0 8px 20px rgb(255, 3, 3);
-      text-align: center;
-      position: relative;
-      overflow: visible;
-      user-select: none;
-    }
-    footer svg {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      width: 100%;
-      height: 40px;
-      display: block;
-      pointer-events: none;
-    }
-
-    @media (max-width: 768px) {
-      nav ul {
-        gap: 1rem;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      form.contact-form {
-        padding: 1.5rem 1.5rem;
-      }
-      h1 {
-        font-size: 2.75rem;
-      }
-    }
-  </style>
-<body>
-  <header>
-    <a href="index.html" aria-label="Home" class="logo">DIDOXX</a>
-    <button class="mobile-menu-button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Toggle menu">&#9776;</button>
-    <nav>
-      <ul id="primary-navigation" role="menu">
-        <li><a href="index.html" role="menuitem" tabindex="0">Home</a></li>
-        <li><a href="About.html" role="menuitem" tabindex="0">About-us</a></li>
-        <li><a href="#" role="menuitem" tabindex="0">Services</a></li>
-        <li><a href="contact.html" role="menuitem" tabindex="0">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <div class="container">
-      <section id="hero" role="banner" aria-label="Welcome">
-        <h2>WELCOME TO DIDOXX!</h2>
-        <p>This is a brief introduction to what my website is all about. Feel free to explore!</p>
-        <a href="About.html" class="button-link">EXPLORE</a>
-      </section>
-
-      <section id="featured" aria-label="Featured Content">
-        <h3>OUR PRODUSTS</h3>
-        <div>
-          <article tabindex="0" aria-label="Featured Item 1">
-            <img src="pro1.jpg" alt="Featured Item 1" />
-            <div>
-              <h4>DRIO</h4>
-              <p>A short description of featured item 1.</p>
-            </div>
-          </article>
-
-          <article tabindex="0" aria-label="Featured Item 2">
-            <img src="pro2.jpg" alt="Featured Item 2" />
-            <div>
-              <h4>RED-MONST</h4>
-              <p>A short description of featured item 2.</p>
-            </div>
-          </article>
-
-          <article tabindex="0" aria-label="Featured Item 3">
-            <img src="pro3.jpg" alt="Featured Item 3" />
-            <div>
-              <h4>JOKER</h4>
-              <p>A short description of featured item 3.</p>
-            </div>
-          </article>
-        </div>
-      </section>
-    </div>
-  </main>
-<footer class="site-primary-footer-wrap ast-builder-grid-row-container site-footer-focus-item ast-builder-grid-row-4-equal ast-builder-grid-row-tablet-2-equal ast-builder-grid-row-mobile-full ast-footer-row-stack ast-footer-row-tablet-stack ast-footer-row-mobile-stack" role="contentinfo" aria-label="Site Footer" style="padding: 1rem 1.5rem; background: #000000; color: #e1e1e1; max-width: 1250px; margin: 1rem auto; border-radius: 24px; backdrop-filter: saturate(180%) blur(20px); box-shadow: 0 6px 24px rgba(0,0,0,0.7);">
-  <style>
-    .site-primary-footer-wrap {
-      display: grid;
-      gap: 1rem;
-      grid-template-columns: repeat(4, 1fr);
-      animation: fadeInUp 0.8s ease forwards;
-      background: rgba(252, 253, 255, 0.75);
-      border-radius: 24px;
-      padding: 1rem 1.5rem;
-      box-sizing: border-box;
-    }
-
-    @media (max-width:1024px) {
-      .site-primary-footer-wrap {
-        grid-template-columns: repeat(2, 1fr);
-        max-width: 480px;
-        margin: 0 auto;
-      }
-    }
-    @media (max-width:640px) {
-      .site-primary-footer-wrap {
-        grid-template-columns: 1fr;
-        max-width: 280px;
-        margin: 0 auto;
-      }
-    }
-
-    .footer-column {
-      background: #3b3a3a;
-      padding: 1.2rem 1rem;
-      color: #fbf1f3a8;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-      clip-path: polygon(
-        50% 0%, 
-        95% 25%, 
-        100% 75%, 
-        75% 95%, 
-        25% 95%, 
-        0% 75%, 
-        5% 25%
-      );
-      border-radius: 20px;
-      backdrop-filter: saturate(180%) blur(10px);
-      border: 1px solid rgba(255,255,255,0.12);
+  @keyframes fadeInUp {
+    0% {
       opacity: 0;
-      transform: translateY(15px) scale(0.95);
-      animation: fadeInUp 0.6s ease forwards;
-      cursor: default;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      text-align: center;
-      font-size: 0.875rem;
+      transform: translateY(20px);
     }
-
-    .footer-column:hover,
-    .footer-column:focus-within {
-      box-shadow: 0 10px 28px rgba(0,0,0,0.6);
-      transform: translateY(0) scale(1.05);
-      outline: none;
+    100% {
+      opacity: 1;
+      transform: translateY(0);
     }
+  }
 
-    .footer-column h3 {
-      margin-top: 0;
-      margin-bottom: 0.8rem;
-      font-weight: 700;
-      font-family: 'Poppins', sans-serif;
-      color: #f3f4f6;
-      font-size: 1.1rem;
+  @keyframes fadeInUpScale {
+    0% {
+      opacity: 0;
+      transform: translateY(20px) scale(0.85);
     }
-
-    .footer-column ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
+  }
 
-    .footer-column ul li {
-      margin-bottom: 0.5rem;
+  @keyframes underlineGrow {
+    0% {
+      transform: scaleX(0);
+      opacity: 0;
     }
-
-    .footer-column ul li a {
-      color: #9ca3af;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.85rem;
-      transition: color 0.3s ease;
+    100% {
+      transform: scaleX(1);
+      opacity: 1;
     }
+  }
 
-    .footer-column ul li a:hover,
-    .footer-column ul li a:focus {
-      color: #3b82f6;
-      outline: none;
+  @keyframes backgroundMove {
+    0% {
+      transform: translate(0%, 0%);
     }
-
-    .footer-column:nth-child(1) { animation-delay: 0.1s; }
-    .footer-column:nth-child(2) { animation-delay: 0.3s; }
-    .footer-column:nth-child(3) { animation-delay: 0.5s; }
-    .footer-column:nth-child(4) { animation-delay: 0.7s; }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+    50% {
+      transform: translate(10%, 10%);
     }
-  </style>
+    100% {
+      transform: translate(0%, 0%);
+    }
+  }
 
-  <div class="footer-column" tabindex="0" aria-label="Company Information">
-    <h3>Company</h3>
-    <ul>
-      <li><a href="#">About Us</a></li>
-      <li><a href="#">Careers</a></li>
-      <li><a href="#">Press</a></li>
-    </ul>
+  @keyframes floatUpDown {
+    0%, 100% {
+      transform: translateY(0);
+      opacity: 0.15;
+    }
+    50% {
+      transform: translateY(-20px);
+      opacity: 0.3;
+    }
+  }
+
+  /* SVG icon styles and animation */
+  #logo-icon {
+    width: 48px;
+    height: 48px;
+    fill: var(--color-primary);
+    animation: iconGlow 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes iconGlow {
+    0% {
+      filter: drop-shadow(0 0 0px var(--color-primary));
+      transform: scale(1);
+    }
+    100% {
+      filter: drop-shadow(0 0 16px var(--color-primary));
+      transform: scale(1.1);
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 480px) {
+    #index-logo {
+      font-size: 3rem;
+      letter-spacing: 5px;
+    }
+    #logo-icon {
+      width: 36px;
+      height: 36px;
+    }
+    #index-subtitle {
+      font-size: 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+    </div>
+    <div id="index-overlay" role="banner" aria-label="Website index Animation">
+    <div id="index-logo" aria-live="polite" aria-atomic="true" aria-label="Website name DIDOXX">
+        <img id="logo-icon" src="logo.png" alt="DIDOXX Logo" width="64" height="64">
+        DIDOXX
+    </div>
+</div>
+<br>
+
+</br>
+    <div id="index-subtitle"> welcome  </div>
   </div>
 
-  <div class="footer-column" tabindex="0" aria-label="Support Links">
-    <h3>Support</h3>
-    <ul>
-      <li><a href="#">Help Center</a></li>
-      <li><a href="#">FAQs</a></li>
-      <li><a href="#">Contact Support</a></li>
-    </ul>
-  </div>
+  <!-- Floating shapes for subtle background effect -->
+  <div class="floating-shape shape-1" aria-hidden="true"></div>
+  <div class="floating-shape shape-2" aria-hidden="true"></div>
+  <div class="floating-shape shape-3" aria-hidden="true"></div>
 
-  <div class="footer-column" tabindex="0" aria-label="Legal Information">
-    <h3>Legal</h3>
-    <ul>
-      <li><a href="PRIVACY-POLICY.html">Privacy Policy</a></li>
-      <li><a href="#">Terms of Service</a></li>
-      <li><a href="#">Cookie Policy</a></li>
-    </ul>
-  </div>
-
-  <div class="footer-column" tabindex="0" aria-label="Follow Us">
-    <h3>Follow Us</h3>
-    <ul>
-      <li><a href="#" aria-label="Facebook">Facebook</a></li>
-      <li><a href="#" aria-label="Twitter">Twitter</a></li>
-      <li><a href="#" aria-label="Instagram">Instagram</a></li>
-    </ul>
-  </div>
-</footer>
-
-
- <footer style="
-  max-width:1200px; 
-  margin:3rem auto; 
-  padding:2rem 0.1rem; 
-  background:#000001; 
-  color:#acacac; 
-  border-radius:40px; 
-  box-shadow:0 8px 20px #010b57; 
-  text-align:center; 
-  position:relative;
-  overflow: visible;
-">
-  <p>&copy; 2025 DIDOXX. All rights reserved</p>
-  <svg viewBox="0 0 200 40" preserveAspectRatio="none" 
-       style="position:absolute; top:-40px; left:0; width:100%; height:40px; display:block;">
-    <path fill="#322659" d="M0 40 Q100 0 200 40 Z"/>
-  </svg>
-</footer>
-
+  <script>
+    // Redirect to main site after 3.5 seconds (duration of index animation)
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 3500);
+  </script>
 </body>
 </html>
+
